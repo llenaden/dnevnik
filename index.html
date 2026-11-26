@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#F7F7F7">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Дневник тела">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Дневник тела</title>
@@ -92,6 +92,8 @@ body.t2 .add.more{background:#fff;color:var(--ink);box-shadow:var(--sh)}
 .tx{min-width:0;overflow-wrap:anywhere}
 .tx>*+*{margin-top:4px}
 .art .tx>.b{margin-top:6px}
+.cks{display:flex;gap:4px}
+.item:has(>.cks) .tx{overflow-wrap:normal;-webkit-hyphens:auto;hyphens:auto}
 .ck{width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--sel);display:grid;place-items:center;color:transparent;flex:none}
 .ck.on{background:var(--dark);box-shadow:none;color:#fff}
 .ck[disabled]{opacity:.35}
@@ -182,6 +184,8 @@ body.t2 .add.more{background:#fff;color:var(--ink);box-shadow:var(--sh)}
 .sd .hx{position:absolute;bottom:1px;left:50%;width:11px;height:11px;margin-left:-5.5px;color:#FF4F9A}
 .sd.per .hx,.sd.on .hx{color:#fff}
 .hd2 .ui{width:18px;height:18px}
+.hd2.part,body.t2 .hd2.part{box-shadow:inset 0 0 0 2.5px #E3E4EA;background:#fff}
+.hd2.part::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(var(--dark) calc(var(--p,0)*1turn),transparent 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px))}
 .hd2.on{background:var(--dark);color:#fff}
 .hd2.on.today,.sd.now,.c.on.ring{box-shadow:none}
 
@@ -310,12 +314,14 @@ body.t2:not(.accw) #view .add:not(.card .add,.more){position:relative;--c1:oklch
   border:2px solid transparent;background:linear-gradient(#262626,#262626),linear-gradient(#262626 50%,rgba(38,38,38,.6) 80%,rgba(38,38,38,0)),linear-gradient(90deg,var(--c1),var(--c5),var(--c3),var(--c4),var(--c2));
   background-size:200%;background-clip:padding-box,border-box,border-box;background-origin:border-box;animation:rainbow 4s linear infinite}
 body.t2:not(.accw) #view .add:not(.card .add,.more)::before{content:"";position:absolute;bottom:-20%;left:50%;z-index:-1;height:20%;width:60%;transform:translateX(-50%);pointer-events:none;
-  background:linear-gradient(90deg,var(--c1),var(--c5),var(--c3),var(--c4),var(--c2));background-size:200%;filter:blur(.75rem);animation:rainbow 4s linear infinite}
+  background:linear-gradient(90deg,var(--c1),var(--c5),var(--c3),var(--c4),var(--c2));background-size:200%;filter:blur(.6rem);opacity:.35;animation:rainbow 4s linear infinite}
 body.t2.accw .fch{--chip-ink:#fff}
 body.t2.accw .fch button{background:rgba(255,255,255,.28)}body.t2.accw .fch button:not(.on){color:#fff}
 body.t2.accw :is(.sheet,.card,.hab){--acc-bg:#262626;--acc:#fff;--acc-ink:#262626;--acc-mute-bg:#E3E3E3;--acc-mute:#9A9A9A;--acc-sh:rgba(0,0,0,.16);--focus:#8E8E8E}
 body.t2[data-bg=img] #bgl{position:fixed;top:calc(-1 * var(--ext));bottom:0;height:auto;background:var(--bgtop,#F2F3F6);transition:none}
-body.t2[data-bg=img]{background:var(--bgtop,#F2F3F6)}
+body.t2[data-bg=img]{background:var(--bgtop,#F2F3F6);--fadec:var(--bgtop,#F2F3F6)}
+body.t2[data-bg=mesh1]{--fadec:#E2B6BE}
+#bgf{display:none;position:absolute;left:0;right:0;top:var(--ext,0px);height:120px;z-index:2;background:var(--fadec,#F2F3F6);-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.86) 16%,rgba(0,0,0,.62) 34%,rgba(0,0,0,.36) 54%,rgba(0,0,0,.16) 72%,rgba(0,0,0,.05) 88%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.86) 16%,rgba(0,0,0,.62) 34%,rgba(0,0,0,.36) 54%,rgba(0,0,0,.16) 72%,rgba(0,0,0,.05) 88%,transparent 100%)}
 body.t2[data-bg=img] #bgl::before{content:"";position:absolute;left:0;width:100%;top:calc(2 * var(--ext) - 100%);height:calc(100% - var(--ext));background:var(--bgu,none) center/cover no-repeat;transform:scaleY(-1)}
 .bgs button[data-v=img]{background:#E9E9EC center/cover no-repeat}
 .bgs .bgadd{aspect-ratio:1;max-width:44px;width:100%;justify-self:center;border-radius:50%;display:grid;place-items:center;background:var(--fill);color:var(--ink);cursor:pointer}
@@ -389,6 +395,8 @@ body.t2 .hint.pop{background:#fff;box-shadow:inset 0 0 0 1px #fff,0 2px 4px rgba
 .sd.ov{background:#9B6BFF;color:#fff}
 .sd.fert{background:#EEE7FF;color:#7A4FE0}
 .lg-per{width:10px;height:10px;border-radius:50%;background:#FF5A6E;display:inline-block}
+.lg-pp{width:10px;height:10px;border-radius:50%;background:rgba(255,90,110,.28);display:inline-block}
+.sd.pp,body.t2 .sd.pp{background:rgba(255,90,110,.18);color:#E5394F}
 .lg-hx{width:16px;height:16px;color:#FF4F9A}
 .mode{display:grid;grid-template-columns:1fr 1fr;gap:var(--in)}
 .mode button{display:flex;align-items:center;gap:12px;padding:12px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 1px transparent;text-align:left;transition:box-shadow .15s}
@@ -468,6 +476,8 @@ label.item{cursor:pointer}
 .restb .tg::after{background:#C6C8D0;box-shadow:none}
 .restb .tg.on::after{background:var(--dark)}
 .empty{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:8px 16px;color:var(--muted)}
+body.t2 #view .empty:not(.card .empty){color:var(--ink)}
+body.t2.inkw #view .empty:not(.card .empty){color:#fff}
 .local{text-align:center}
 
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--dark);color:#fff;padding:10px 18px;border-radius:999px;font-size:var(--btn-t);font-weight:700;z-index:60;max-width:calc(100% - 40px)}
@@ -498,7 +508,7 @@ button:active,label.item:active{transform:scale(.97)}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 </style>
 
-<div id="bgl" aria-hidden="true"><img id="bgi" alt="" decoding="async"></div>
+<div id="bgl" aria-hidden="true"><img id="bgi" alt="" decoding="async"><i id="bgf"></i></div>
 <div class="app"><main id="view" class="view"></main></div>
 <nav class="nav" aria-label="Разделы"><div class="in" id="tabs"></div></nav>
 <div class="sw" id="sw" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
@@ -662,7 +672,7 @@ function normProfile(p){
     if(OLD_DEFAULTS.includes(JSON.stringify(p.plan.map(x=>x.tags)))) plan=DEFAULT_PLAN;
     else plan=p.plan.map(x=>{const set=new Set(x.tags.map(t=>OLDMAP[t]||t));return {tags:TAGS.filter(t=>set.has(t))}});
   }
-  const vit=Array.isArray(p?.vitamins)?p.vitamins.map(v=>({id:v.id,name:v.name,note:v.note??[v.dose,v.time].filter(Boolean).join(', '),...(Number.isInteger(v.icon)?{icon:v.icon}:{})})):[];
+  const vit=Array.isArray(p?.vitamins)?p.vitamins.map(v=>({id:v.id,name:v.name,note:v.note??[v.dose,v.time].filter(Boolean).join(', '),...(Number.isInteger(v.icon)?{icon:v.icon}:{}),...(Number.isInteger(v.times)&&v.times>1?{times:Math.min(6,v.times)}:{})})):[];
   const foodLv=p?.foodLv&&typeof p.foodLv==='object'?Object.fromEntries(Object.entries(p.foodLv).filter(([k,v])=>Number.isInteger(v)&&v>=0&&v<=2)):{};
   const b=p?.body&&typeof p.body==='object'?p.body:{},num=v=>Number.isFinite(+v)&&+v>0?+v:null;
   const body={age:num(b.age),h:num(b.h),w:num(b.w),act:Number.isInteger(b.act)?b.act:1,preg:!!b.preg,tri:[1,2,3].includes(b.tri)?b.tri:1};
@@ -684,6 +694,13 @@ function status(k){
   return null;
 }
 const trained=k=>{const s=status(k);return s==='done'||s==='partial'};
+const vTimes=v=>Math.min(6,Math.max(1,Number.isInteger(v?.times)?v.times:1));
+const vDose=(r,v)=>{const n=vTimes(v),full=(r?.vitamins||[]).includes(v.id);if(n===1)return full?1:0;const c=r?.vdose?.[v.id];return Number.isInteger(c)&&!full?Math.min(n,c):full?n:0};
+function setDose(r,v,c){const n=vTimes(v);c=Math.max(0,Math.min(n,c));const vd={...(r.vdose||{})};if(n>1&&c>0&&c<n)vd[v.id]=c;else delete vd[v.id];r.vdose=vd;
+  const has=(r.vitamins||[]).includes(v.id);if(c>=n&&!has)r.vitamins=[...(r.vitamins||[]),v.id];if(c<n&&has)r.vitamins=r.vitamins.filter(x=>x!==v.id);return r}
+const nextDose=(r,v,i)=>{const c=vDose(r,v),n=vTimes(v);return i==null||isNaN(i)?(c>=n?0:c+1):(i+1===c?i:i+1)};
+const hd2Dose=(r,v,k,d,attr)=>{const n=vTimes(v),c=vDose(r,v),on=c>=n,part=c>0&&!on,fut=d>TODAY;
+  return `<button class="hd2 ${on?'on':''} ${part?'part':''} ${k===TK?'today':''} ${fut?'future':''}" ${attr} data-k="${k}" ${part?`style="--p:${(c/n).toFixed(3)}"`:''} ${fut?'disabled':''} aria-label="${human(d)}${n>1?`, ${c} из ${n}`:''}">${on?ui('check'):d.getDate()}</button>`};
 const vitCount=k=>(S.days[k]?.vitamins||[]).filter(id=>S.profile.vitamins.some(v=>v.id===id)).length;
 const hasReport=r=>!!(r&&(r.rest||painAny(r)||r.food||(r.foods||[]).length||r.note||+r.weight>0));
 const filledDay=k=>{const r=S.days[k];return !!(r&&((r.entries||[]).length||hasReport(r)))};
@@ -736,15 +753,17 @@ function recPop(open){const el=document.querySelector('.daycol .hint.pop'),bt=do
 document.addEventListener('pointerdown',e=>{const el=document.querySelector('.daycol .hint.pop.show');if(el&&!e.target.closest('.hint.pop,[data-a=recToggle]'))recPop(false)},true);
 let SWT=0;
 async function switchDay(k,dir){
-  const tok=++SWT,old=document.querySelector('.daycol');
-  if(old&&!RM){old.style.transition=`opacity 170ms ease-in,transform 170ms ease-in`;old.style.opacity='0';old.style.transform=`translateX(${-dir*14}px)`;await new Promise(r=>setTimeout(r,170))}
+  const tok=++SWT,old=document.querySelector('.daycol'),wk=wstart(parse(k)).getTime()!==wstart(parse(S.sel)).getTime(),mo=parse(k).getMonth()!==parse(S.sel).getMonth();
+  const outs=[old,...(wk?document.querySelectorAll('#view > .card .r7 .c'):[]),...(mo?[document.querySelector('#view > .top .pill span')]:[])].filter(Boolean);
+  if(old&&!RM){outs.forEach(e=>{e.style.transition=`opacity 170ms ease-in,transform 170ms ease-in`;e.style.opacity='0';e.style.transform=`translateX(${-dir*14}px)`});await new Promise(r=>setTimeout(r,170))}
   if(tok!==SWT)return;
   S.sel=k;render();
-  play(document.querySelector('.daycol'),'kIn',340,{vars:{'--dx':dir*14+'px','--dy':'0px'},ease:'cubic-bezier(0,0,.2,1)'});
+  const ins=[document.querySelector('.daycol'),...(wk?document.querySelectorAll('#view > .card .r7 .c'):[]),...(mo?[document.querySelector('#view > .top .pill span')]:[])];
+  ins.forEach((e,i)=>play(e,'kIn',340,{vars:{'--dx':dir*14+'px','--dy':'0px'},ease:'cubic-bezier(0,0,.2,1)',delay:i&&wk?Math.min(i,8)*12:0}));
 }
 async function saveDayQuiet(k,d){const r={...d,date:k,updatedAt:Date.now()};S.days={...S.days,[k]:r};try{await B.setDay(k,r)}catch(e){toast(errText(e))}}
 const gapOf=el=>{const p=el?.parentElement;if(!p)return 0;const g=parseFloat(getComputedStyle(p).rowGap);return Number.isFinite(g)?g:0};
-const FOLDP=['transition','height','opacity','clipPath','webkitClipPath','marginTop','paddingTop','paddingBottom'];
+const FOLDP=['transition','height','opacity','clipPath','webkitClipPath','marginTop','marginBottom','paddingTop','paddingBottom'];
 /* fold: open or close a block by height with plain CSS transitions. It always starts from where the block is right now. */
 function fold(el,show,o={}){
   if(!el)return Promise.resolve();
@@ -755,15 +774,31 @@ function fold(el,show,o={}){
   if(RM){clear();el.classList.toggle(cls,!show);o.sync&&o.sync(show);return Promise.resolve()}
   clear();el.style.transition='none';
   el.classList.remove(cls);if(show&&o.sync)o.sync(true);
-  const cs=getComputedStyle(el),h=el.offsetHeight,pt=cs.paddingTop,pb=cs.paddingBottom,gap=gapOf(el),k=h?Math.min(1,cur/h):0;
+  const cs=getComputedStyle(el),h=el.offsetHeight,pt=cs.paddingTop,pb=cs.paddingBottom,gap=gapOf(el),k=h?Math.min(1,cur/h):0,first=!el.previousElementSibling&&!!el.nextElementSibling,mt0=parseFloat(cs.marginTop)||0,mb0=parseFloat(cs.marginBottom)||0,et=first?0:-gap,eb=first?-gap:0;
   if(show&&h<1){clear();return Promise.resolve()}
-  Object.assign(el.style,{clipPath:'inset(-40px -40px 0px -40px)',webkitClipPath:'inset(-40px -40px 0px -40px)',height:cur+'px',opacity:co,marginTop:-(1-k)*gap+'px',paddingTop:k?pt:'0px',paddingBottom:k?pb:'0px'});
+  Object.assign(el.style,{clipPath:'inset(-40px -40px 0px -40px)',webkitClipPath:'inset(-40px -40px 0px -40px)',height:cur+'px',opacity:co,marginTop:(mt0*k+et*(1-k))+'px',marginBottom:(mb0*k+eb*(1-k))+'px',paddingTop:k?pt:'0px',paddingBottom:k?pb:'0px'});
   reflow(el);
   const d=440;
-  el.style.transition=`height ${d}ms ${E_IO},margin-top ${d}ms ${E_IO},padding ${d}ms ${E_IO},opacity ${Math.round(show?d*.7:d*.5)}ms ease ${show?Math.round(d*.25):0}ms`;
-  Object.assign(el.style,show?{height:h+'px',opacity:1,marginTop:'0px',paddingTop:pt,paddingBottom:pb}:{height:'0px',opacity:0,marginTop:-gap+'px',paddingTop:'0px',paddingBottom:'0px'});
+  el.style.transition=`height ${d}ms ${E_IO},margin ${d}ms ${E_IO},padding ${d}ms ${E_IO},opacity ${Math.round(show?d*.7:d*.5)}ms ease ${show?Math.round(d*.25):0}ms`;
+  Object.assign(el.style,show?{height:h+'px',opacity:1,marginTop:mt0+'px',marginBottom:mb0+'px',paddingTop:pt,paddingBottom:pb}:{height:'0px',opacity:0,marginTop:et+'px',marginBottom:eb+'px',paddingTop:'0px',paddingBottom:'0px'});
   return new Promise(res=>{el._fto=setTimeout(()=>{if(el._ft===t){if(!show){if(!o.keep)el.classList.add(cls);o.sync&&o.sync(false)}if(show||!o.keep)clear()}res()},d+40)});
 }
+/* lcs diff of two string lists: which new indexes are inserted, which old ones removed (and where) */
+function lcsDiff(a,b){const n=a.length,m=b.length,L=[...Array(n+1)].map(()=>new Array(m+1).fill(0));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=a[i]===b[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  const ins=[],del=[];let i=0,j=0;while(i<n&&j<m){if(a[i]===b[j]){i++;j++}else if(L[i+1][j]>=L[i][j+1])del.push([i++,j]);else ins.push(j++)}
+  while(i<n)del.push([i++,j]);while(j<m)ins.push(j++);return {ins,del}}
+/* animate a list that was just re-rendered: new children grow in, removed ones (given as clones) shrink out in place */
+function morphKids(par,oldKids,keyOf){
+  if(!par||RM)return;const nk=[...par.children],a=oldKids.map(keyOf),b=nk.map(keyOf),{ins,del}=lcsDiff(a,b);
+  if(ins.length+del.length>6)return;
+  ins.forEach(j=>expand(nk[j]));
+  del.forEach(([i,j])=>{const g=oldKids[i];g.removeAttribute('id');g.querySelectorAll('[id]').forEach(y=>y.removeAttribute('id'));g.style.pointerEvents='none';
+    par.insertBefore(g,nk[j]||null);fold(g,false).then(()=>g.remove())});
+}
+/* keep one element still on screen while the content around it changes height */
+function anchorScroll(box,el,ms,t0){if(!box||!el)return;if(t0==null)t0=el.getBoundingClientRect().top;const end=performance.now()+ms;
+  const f=()=>{const d=el.getBoundingClientRect().top-t0;if(Math.abs(d)>.5)box.scrollTop+=d;if(performance.now()<end)requestAnimationFrame(f)};requestAnimationFrame(f)}
 const blockToggle=(el,open,done)=>fold(el,open,{cls:'collapsed',sync:done?()=>done():null});
 const subToggle=(el,show)=>fold(el,show);
 const collapse=el=>fold(el,false,{keep:true});
@@ -783,7 +818,7 @@ function crossView(n,dir,fn){
   setTimeout(()=>gh.remove(),260);
   [...v.children].slice(n).forEach((c,i)=>play(c,'kIn',460,{delay:70+Math.min(i,6)*35,vars:{'--dx':dir?dir*18+'px':'0px','--dy':dir?'0px':'10px'},ease:'cubic-bezier(.2,.7,.2,1)'}));
 }
-let LASTSEL=null,THUMBS={};
+let TGH=null,LASTSEL=null,THUMBS={};
 const thumbKey=c=>{const b=c.querySelector(':scope>button');return b?(c.closest('.nav')?'nav':(b.dataset.a||b.dataset.s||'')):''};
 const boxOf=(c,on)=>{const q=c.closest('.qrow')?15:0;return {x:on.offsetLeft-q,y:on.offsetTop,w:on.offsetWidth+2*q,h:on.offsetHeight}};
 function recordThumbs(){THUMBS={};document.querySelectorAll('.seg,.fch,.nav .in').forEach(c=>{const on=c.querySelector(':scope>button.on');if(on)THUMBS[thumbKey(c)]={...boxOf(c,on),sl:c.scrollLeft}})}
@@ -802,7 +837,7 @@ function syncThumbs(root=document){
   });
   THUMBS={};
 }
-const selOf=t=>{const ds=t.dataset;return ['a','s','k','id','v','p'].filter(k=>ds[k]!==undefined).map(k=>`[data-${k}="${CSS.escape(ds[k])}"]`).join('')};
+const selOf=t=>{const ds=t.dataset;return ['a','s','k','id','v','p','i'].filter(k=>ds[k]!==undefined).map(k=>`[data-${k}="${CSS.escape(ds[k])}"]`).join('')};
 function fxAfter(root){
   syncThumbs(root);
   const sel=LASTSEL;LASTSEL=null;if(!sel||RM)return;
@@ -830,13 +865,15 @@ function cycleInfo(){
   const starts=ks.filter(k=>!S.days[key(add(parse(k),-1))]?.period).map(parse);
   const lens=[];for(let i=1;i<starts.length;i++){const l=daysBetween(starts[i-1],starts[i]);if(l>=18&&l<=45)lens.push(l)}
   const avg=lens.length?Math.round(lens.reduce((a,b)=>a+b,0)/lens.length):null;
+  const runs=starts.map(st=>{let n=0;while(n<14&&S.days[key(add(st,n))]?.period)n++;return n}).filter(n=>n>=2&&n<=10);
+  const PL=runs.length?Math.round(runs.reduce((a,b)=>a+b,0)/runs.length):5;
   const last=starts[starts.length-1]||null;
-  const L=avg||28,ovs=[];
+  const L=avg||28,ovs=[],pp=new Set();
   for(let i=0;i<starts.length;i++){const nx=starts[i+1]||add(starts[i],L);ovs.push(add(nx,-14))}
-  if(last){let nx=add(last,L);for(let j=0;j<3;j++){nx=add(nx,L);ovs.push(add(nx,-14))}}
+  if(last){let nx=add(last,L);for(let j=0;j<12;j++){if(j)ovs.push(add(nx,-14));for(let d=0;d<PL;d++){const dd=add(nx,d);if(dd>=TODAY)pp.add(key(dd))}nx=add(nx,L)}}
   const ovKeys=new Set(ovs.map(key)),fert=new Set();ovs.forEach(o=>{for(let j=-5;j<=1;j++)if(j)fert.add(key(add(o,j)))});
   const nextOv=ovs.find(o=>o>=TODAY)||null;
-  return {last,avg,next:last&&avg?add(last,avg):null,ovKeys,fert,nextOv,assumed:!avg};
+  return {last,avg,next:last?add(last,L):null,ovKeys,fert,pp,nextOv,assumed:!avg};
 }
 
 /* ---------- articles ---------- */
@@ -1240,14 +1277,14 @@ function vToday(){
   <div class="daycol">
     <div class="grp dayblk">
       <div class="dayh"><div class="gh"><div class="h1">${human(sel)}</div><div class="cap">${DOWF[dow(sel)]}</div></div>
-        <div class="dayc">${r.rest?'':`<button class="ib rect" data-a="recToggle" data-k="${S.sel}" aria-expanded="false" aria-label="Рекомендация на день">${lui('chev-down')}</button>`}<button class="restb" data-a="restDay" data-k="${S.sel}" aria-pressed="${!!r.rest}"><span class="cap">Отдых</span><span class="tg ${r.rest?'on':''}"></span></button></div></div>
+        <div class="dayc">${r.rest?'':`<button class="ib rect" data-a="recToggle" data-k="${S.sel}" aria-expanded="false" aria-label="Рекомендация на день">${lui('chev-down')}</button>`}<button class="restb" data-a="restDay" data-k="${S.sel}" aria-pressed="${!!r.rest}"><span class="cap">Отдых</span><span class="tg ${(TGH!==null?TGH:r.rest)?'on':''}"></span></button></div></div>
       ${r.rest?'':`<div class="hint pop"><button class="hint-b" data-a="planEdit" data-i="${dow(sel)}" aria-label="Рекомендация на день, изменить"><div class="apps">${p.tags.map(t=>`<div class="app-i">${tagTile(t)}<span class="cap">${esc(t)}</span></div>`).join('')}</div></button></div>`}
     </div>
     ${r.rest?'':`<div class="grp trn">${gh('Мои тренировки')}
       ${r.entries.map(e=>`<div class="item ${e.done?'done':''}">${titleTile(e.title)}<button class="tx" data-a="entry" data-k="${S.sel}" data-id="${e.id}"><div class="b">${esc(e.title)}</div>${e.link?'<div class="cap">Есть видео</div>':''}</button><button class="ck ${e.done?'on':''}" data-a="entryDone" data-k="${S.sel}" data-id="${e.id}" aria-label="Отметить выполненной" ${future?'disabled':''}>${ui('check')}</button></div>`).join('')}
       <button class="add ${r.entries.length?'more':''}" data-a="addEntry">${ui('add')}${r.entries.length?'Добавить ещё':'Добавить тренировку'}</button></div>`}
     <div class="grp">${gh('Таблетки')}
-      ${vit.map(v=>{const on=(r.vitamins||[]).includes(v.id);return `<div class="item">${vTile(v)}<div class="tx"><div class="b">${esc(v.name)}</div>${v.note?`<div class="cap">${esc(v.note)}</div>`:''}</div><button class="ck ${on?'on':''}" data-a="vitDay" data-k="${S.sel}" data-id="${v.id}" aria-label="Выпила ${esc(v.name)}" ${future?'disabled':''}>${ui('check')}</button></div>`}).join('')}
+      ${vit.map(v=>{const n=vTimes(v),c=vDose(r,v);return `<div class="item">${vTile(v)}<div class="tx"><div class="b">${esc(v.name)}</div>${v.note?`<div class="cap">${esc(v.note)}</div>`:''}</div>${n===1?`<button class="ck ${c?'on':''}" data-a="vitDay" data-k="${S.sel}" data-id="${v.id}" aria-label="Выпила ${esc(v.name)}" ${future?'disabled':''}>${ui('check')}</button>`:`<div class="cks">${[...Array(n)].map((_,i)=>`<button class="ck ${i<c?'on':''}" data-a="vitDay" data-k="${S.sel}" data-id="${v.id}" data-i="${i}" aria-label="${esc(v.name)}, приём ${i+1} из ${n}" ${future?'disabled':''}>${ui('check')}</button>`).join('')}</div>`}</div>`}).join('')}
       ${vit.length?'':`<button class="add" data-a="addVit">${ui('add')}Добавить препарат</button>`}</div>
     <div class="grp repg">${gh('Самочувствие и питание')}${reportCard(r,future)}</div>
   </div>`;
@@ -1277,7 +1314,7 @@ let BGK='',BGU='';
 const dataToUrl=d=>{try{const p=d.indexOf(','),mime=(d.slice(0,p).match(/:(.*?);/)||[])[1]||'image/jpeg',bin=atob(d.slice(p+1)),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return URL.createObjectURL(new Blob([u],{type:mime}))}catch(e){return d}};
 const paintSw=()=>{if(BGU)document.querySelectorAll('.bgs button[data-v=img]').forEach(b=>{const v=`url("${BGU}")`;if(b.dataset.u!==BGU){b.dataset.u=BGU;b.style.backgroundImage=v}})};
 /* the picture lives in its own <img> layer and is decoded once; nothing on <body> changes when the page redraws */
-function topColor(im){try{const c=document.createElement('canvas');c.width=16;c.height=16;const g=c.getContext('2d');g.drawImage(im,0,0,16,16);const p=g.getImageData(0,0,16,2).data;let r=0,gg=0,b=0;for(let i=0;i<p.length;i+=4){r+=p[i];gg+=p[i+1];b+=p[i+2]}const n=p.length/4;return '#'+[r,gg,b].map(v=>Math.round(v/n).toString(16).padStart(2,'0')).join('')}catch(e){return ''}}
+function topColor(im){try{const c=document.createElement('canvas');c.width=24;c.height=48;const g=c.getContext('2d');g.drawImage(im,0,0,24,48);const p=g.getImageData(0,0,24,1).data;let r=0,gg=0,b=0;for(let i=0;i<p.length;i+=4){r+=p[i];gg+=p[i+1];b+=p[i+2]}const n=p.length/4;return '#'+[r,gg,b].map(v=>Math.round(v/n).toString(16).padStart(2,'0')).join('')}catch(e){return ''}}
 let BGTOP='';
 function setTheme(){const v=curBg(),row=BGS.find(x=>x[0]===v),mx=(a,b)=>'#'+[1,3,5].map(i=>Math.round((parseInt(a.slice(i,i+2),16)+parseInt(b.slice(i,i+2),16))/2).toString(16).padStart(2,'0')).join('');
   const c=v==='img'?(BGTOP||'#F2F3F6'):v==='mesh1'?'#E2B6BE':(row&&row[2]&&v!=='gray'?mx(row[2],row[3]):'#F2F3F6');
@@ -1420,8 +1457,7 @@ function vVit(){
   let h=topBar('pill','Таблетки',arrows('hPrev','hNext','Прошлая неделя','Следующая неделя'));
   if(!S.profile.vitamins.length)return h+`<div class="grp"><div class="empty">${tile(24)}<span>Добавь препараты, которые пьёшь. Они появятся в каждом дне на главной</span></div><button class="add" data-a="addVit">${ui('add')}Добавить препарат</button></div>`;
   h+=`<div class="grp">${gh(range(ws,add(ws,6)))}`+S.profile.vitamins.map(v=>`<section class="hab"><div class="hh"><button class="h" data-a="habEdit" data-id="${v.id}" aria-label="Изменить ${esc(v.name)}">${vTile(v)}<div class="tx"><div class="b">${esc(v.name)}</div>${v.note?`<div class="cap">${esc(v.note)}</div>`:''}</div></button><button class="ib xp" data-a="habCal" data-id="${v.id}" aria-label="Все дни приёма">${lui('expand')}</button></div>
-    <div class="r7">${DOW.map(d=>`<div class="hd">${d}</div>`).join('')}${ds.map(d=>{const k=key(d),on=(S.days[k]?.vitamins||[]).includes(v.id),fut=d>TODAY;
-      return `<button class="hd2 ${on?'on':''} ${k===TK?'today':''} ${fut?'future':''}" data-a="vitDay" data-k="${k}" data-id="${v.id}" ${fut?'disabled':''} aria-label="${human(d)}">${on?ui('check'):d.getDate()}</button>`}).join('')}</div></section>`).join('');
+    <div class="r7">${DOW.map(d=>`<div class="hd">${d}</div>`).join('')}${ds.map(d=>{const k=key(d);return hd2Dose(S.days[k],v,k,d,`data-a="vitDay" data-id="${v.id}"`)}).join('')}</div></section>`).join('');
   return h+`<button class="add" data-a="addVit">${ui('add')}Добавить препарат</button></div>`;
 }
 
@@ -1430,18 +1466,17 @@ function vCycle(){
   let sexN=0;Object.keys(S.days).forEach(k=>{const d=parse(k);if(S.days[k].sex&&d.getMonth()===m.getMonth()&&d.getFullYear()===m.getFullYear())sexN++});
   let g=DOW.map(d=>`<div class="hd">${d}</div>`).join('');
   rows.forEach(w=>{for(let i=0;i<7;i++){const d=add(w,i),k=key(d),out=d.getMonth()!==m.getMonth(),r=S.days[k]||{};
-    const pred=ci.next&&!r.period&&d>=ci.next&&d<add(ci.next,5);
-    const ov=!out&&!r.period&&ci.ovKeys?.has(k),fe=!out&&!r.period&&!ov&&ci.fert?.has(k);
-    const cls=['sd',out?'out '+(d<TODAY?'op':'of'):r.period?'per':ov?'ov':k===TK?'today':fe?'fert':d>TODAY?'future':'',!out&&k===TK&&(r.period||ov)?'now':''].join(' ');
-    g+=`<button class="cell" data-a="cyc" data-k="${k}" ${d>TODAY||out?'disabled':''} aria-label="${human(d)}"><span class="${cls}" ${pred&&!out?'style="box-shadow:inset 0 0 0 1px #FF5A6E"':''}>${d.getDate()}${r.sex&&!out?svgOf('favorite').replace('<svg ','<svg class="hx" '):''}</span></button>`}});
+    const ov=!out&&!r.period&&ci.ovKeys?.has(k),fe=!out&&!r.period&&!ov&&ci.fert?.has(k),pp=!out&&!r.period&&!ov&&!fe&&ci.pp?.has(k);
+    const cls=['sd',out?'out '+(d<TODAY?'op':'of'):r.period?'per':ov?'ov':k===TK?'today':fe?'fert':pp?'pp':d>TODAY?'future':'',!out&&k===TK&&(r.period||ov)?'now':''].join(' ');
+    g+=`<button class="cell" data-a="cyc" data-k="${k}" ${d>TODAY||out?'disabled':''} aria-label="${human(d)}"><span class="${cls}">${d.getDate()}${r.sex&&!out?svgOf('favorite').replace('<svg ','<svg class="hx" '):''}</span></button>`}});
   return topBar('water_drop','Цикл',arrows('cPrev','cNext','Предыдущий месяц','Следующий месяц'))+`
   <section class="streak col"><span class="h2">${MON[m.getMonth()]} ${m.getFullYear()}</span><div class="r7 mgrid">${g}</div>
-    <div class="legend"><span><i class="lg-per"></i>Месячные</span><span><i class="lg-ov"></i>Овуляция</span><span><i class="lg-fe"></i>Фертильные дни</span><span>${svgOf('favorite').replace('<svg ','<svg class="lg-hx" ')}Близость</span><span class="cap">Нажми на день, чтобы отметить</span></div></section>
+    <div class="legend"><span><i class="lg-per"></i>Месячные</span><span><i class="lg-pp"></i>Прогноз месячных</span><span><i class="lg-ov"></i>Овуляция</span><span><i class="lg-fe"></i>Фертильные дни</span><span>${svgOf('favorite').replace('<svg ','<svg class="lg-hx" ')}Близость</span></div></section>
   <section class="card col">
     <div class="st">${tile('water_drop','vRed')}<div><div class="cap">Последние месячные</div><div class="b">${ci.last?'начались '+human(ci.last):'Пока не отмечены'}</div></div></div>
     <div class="st">${tile('calendar','vAmber')}<div><div class="cap">Средняя длина цикла</div><div class="b">${ci.avg?ci.avg+' '+plural(ci.avg,'день','дня','дней'):'Отметь хотя бы два цикла'}</div></div></div>
     ${ci.nextOv?`<div class="st">${tile('heartsx','vLilac')}<div><div class="cap">Овуляция примерно</div><div class="b">${human(ci.nextOv)}${ci.assumed?' <span class="cap">при цикле 28 дней</span>':''}</div></div></div>`:''}
-    ${ci.next?`<div class="st">${tile('bed','vDark')}<div><div class="cap">Следующие примерно</div><div class="b">${human(ci.next)}</div></div></div>`:''}
+    ${ci.next?`<div class="st">${tile('bed','vDark')}<div><div class="cap">Следующие примерно</div><div class="b">${human(ci.next)}${ci.assumed?' <span class="cap">при цикле 28 дней</span>':''}</div></div></div>`:''}
     <div class="st">${tile('favorite','vPink')}<div><div class="cap">Близость в этом месяце</div><div class="b">${sexN}</div></div></div>
     <span class="cap">Прогноз примерный и не подходит как способ защиты от беременности</span>
   </section>`;
@@ -1524,12 +1559,33 @@ function render(){
   const B0=document.body,setD=(k,v)=>{v=String(v);if(B0.dataset[k]!==v)B0.dataset[k]=v};
   if(!B0.classList.contains('t2'))B0.classList.add('t2');setD('bg',curBg());if(B0.classList.contains('bgscroll')===bgFixed())B0.classList.toggle('bgscroll',!bgFixed());applyAcc();if(B0.classList.contains('inkw')!==(curInk()==='light'))B0.classList.toggle('inkw',curInk()==='light');setD('blur',curBlur());showBg();setTheme();
   document.getElementById('tabs').innerHTML=TABS.map(([k,i,t])=>`<button class="${S.tab===k||(k==='me'&&S.tab==='plan')?'on':''}" data-a="tab" data-v="${k}" aria-label="${t}" ${S.tab===k?'aria-current="page"':''}>${ui(i)}</button>`).join('');
+  const v0=document.getElementById('view'),same=S.tab==='today'&&v0.dataset.tab==='today'&&v0.dataset.sel===S.sel;
+  const tb0=same?v0.querySelector('.daycol .trn'):null,trnB0=tb0&&tb0.offsetHeight>0?tb0.cloneNode(true):null,rc0=same?v0.querySelector('.daycol [data-a=recToggle]')?.cloneNode(true):null,trn0=same?[...v0.querySelectorAll('.daycol .trn > *')].map(e=>e.cloneNode(true)):null,rep0=same?v0.querySelector('.daycol .repg .repc')?.cloneNode(true):null;
+  v0.dataset.tab=S.tab;v0.dataset.sel=S.tab==='today'?S.sel:'';
   document.getElementById('view').innerHTML={today:vToday,summary:vSummary,vitamins:vVit,cycle:vCycle,journal:vJournal,plan:vPlan,me:vMe}[S.tab]();
   typo(document.getElementById('view'));fitTiles(document.getElementById('view'));
   document.querySelectorAll('#view .add:not(:has(>.lbl))').forEach(b=>{const l=document.createElement('span');l.className='lbl';l.append(...b.childNodes);b.append(l)});
   fxAfter();
+  if(same&&!RM){const t=v0.querySelector('.daycol .trn');
+    if(trnB0&&!t){const at=v0.querySelector('.daycol .dayblk');if(at){trnB0.style.pointerEvents='none';at.after(trnB0);fold(trnB0,false).then(()=>trnB0.remove())}}
+    else if(!tb0&&t)expand(t);
+    const rc=v0.querySelector('.daycol [data-a=recToggle]'),dc=v0.querySelector('.daycol .dayc');
+    if(rc0&&!rc&&dc){rc0.style.pointerEvents='none';rc0.removeAttribute('data-a');dc.prepend(rc0);rc0.style.transition='opacity 220ms ease,transform 220ms ease';reflow(rc0);rc0.style.opacity='0';rc0.style.transform='scale(.85)';setTimeout(()=>rc0.remove(),240)}
+    else if(!rc0&&rc)play(rc,'kPopIn',350);
+  }
+  if(trn0&&trn0.length){const t=v0.querySelector('.daycol .trn');if(t&&!t.style.height)morphKids(t,trn0,e=>e.classList?.contains('item')?'i:'+(e.querySelector('[data-a=entry]')?.dataset.id||''):e.className+':'+e.textContent)}
+  if(rep0)morphRep(rep0);
+}
+function morphRep(oc){
+  const nr=document.querySelector('.daycol .repg .repc');if(!nr||!oc||nr.outerHTML===oc.outerHTML||RM)return;
+  const oh=oc.querySelector('.rh'),nh=nr.querySelector('.rh .tx');if(oh&&nh&&oh.querySelector('.tx')?.innerHTML!==nh.innerHTML)play(nh,'kFade',300,{ease:'ease'});
+  const ob=oc.classList.contains('open')?oc.querySelector('.rep-body'):null,nb=nr.classList.contains('open')?nr.querySelector('.rep-body'):null;
+  if(!ob&&nb){expand(nb);return}
+  if(ob&&!nb){nr.append(ob);fold(ob,false).then(()=>ob.remove());return}
+  if(ob&&nb)morphKids(nb,[...ob.children],e=>e.outerHTML);
 }
 
+try{if(!document.documentElement.lang)document.documentElement.lang='ru'}catch(e){}
 /* ---------- sheets ---------- */
 ['touchmove','wheel'].forEach(t=>document.addEventListener(t,e=>{const sw=document.getElementById('sw');if(sw&&!sw.hidden&&(e.target===sw||!e.target.closest?.('#sheet')))e.preventDefault()},{passive:false}));
 let SHTO;
@@ -1613,12 +1669,16 @@ function foodSec(x){
 const newFe=()=>({id:null,name:'',fk:'',q:'',u:'шт',lv:null,own:false,ownOf:'',cat:null,ok:'',op:'',of:'',oc:'',opc:''});
 function updFood(list){
   const x=S.sh;if(!x||x.kind!=='report')return;const fe=x.fe,sh=document.getElementById('sheet'),form=document.getElementById('fForm');if(!form)return;
-  if(list){const t0=form.getBoundingClientRect().top;document.getElementById('fList').innerHTML=foodList(x);sh.scrollTop+=form.getBoundingClientRect().top-t0}
+  if(list){const L=document.getElementById('fList'),t0=form.getBoundingClientRect().top,fl0=L.querySelector('.fl'),rows0=fl0?[...fl0.children].map(e=>e.cloneNode(true)):null,kids0=[...L.children].map(e=>e.cloneNode(true));
+    L.innerHTML=foodList(x);
+    if(RM)sh.scrollTop+=form.getBoundingClientRect().top-t0;
+    else{const fl=L.querySelector('.fl');if(!kids0.length)[...L.children].forEach(c=>expand(c));else if(!fl)kids0.forEach(g=>{L.append(g);fold(g,false).then(()=>g.remove())});else if(rows0)morphKids(fl,rows0,e=>e.dataset?.id||'');
+      sh.scrollTop+=form.getBoundingClientRect().top-t0;anchorScroll(sh,form,520,t0)}}
   const n=document.getElementById('fN'),q=document.getElementById('fQ');
   if(n.value!==fe.name)n.value=fe.name;if(q.value!==String(fe.q))q.value=fe.q;
   q.placeholder=fe.u==='г'?'100':fe.u==='мл'?'200':'1';
   document.querySelectorAll('#fU button').forEach(b=>b.classList.toggle('on',b.dataset.v===fe.u));syncThumbs();
-  setDyn(x);document.getElementById('fAct').innerHTML=foodAct(fe);
+  setDyn(x);{const fa=document.getElementById('fAct'),nh=foodAct(fe);if(fa.innerHTML!==nh){const h0=fa.offsetHeight;fa.innerHTML=nh;if(!RM){const h1=fa.offsetHeight;if(Math.abs(h1-h0)>2){const t=fa._ht=(fa._ht||0)+1;fa.style.transition='none';fa.style.height=h0+'px';fa.style.overflow='hidden';reflow(fa);fa.style.transition=`height 380ms ${E_IO}`;fa.style.height=h1+'px';setTimeout(()=>{if(fa._ht===t){fa.style.height='';fa.style.overflow='';fa.style.transition=''}},420)}}}}
 }
 function normBox(n,b){
   if(!n)return '';
@@ -1627,6 +1687,7 @@ function normBox(n,b){
 }
 function renderSheet(){
   const el=document.getElementById('sheet'),x=S.sh,sc=el.scrollTop;if(!x)return;
+  const swo=document.getElementById('sw'),live=swo.classList.contains('open')&&!swo.classList.contains('closing')&&!RM,h0=live?el.offsetHeight:0;
   if(x.kind==='entry'){
     const d=parse(x.k),tags=[...new Set(['Зарядка',...planFor(d).tags.filter(t=>t!=='Отдых'),'Заминка'])],others=TAGS.filter(t=>!tags.includes(t)&&t!=='Отдых');
     const pk=t=>`<button class="app-i ${x.e.title===t?'on':''}" data-s="pick" data-v="${esc(t)}">${tagTile(t)}<span class="cap">${esc(t)}</span></button>`;
@@ -1653,6 +1714,7 @@ function renderSheet(){
       <div class="grp">${gh('Иконка')}<div class="card"><div class="apps pick">${PILLI.map(([gg,pp],i)=>`<button class="app-i ${x.v.icon===i?'on':'off'}" data-s="vicon" data-v="${i}" aria-label="Иконка ${i+1}">${tile(gg,pp)}</button>`).join('')}</div></div></div>
       <div class="grp">${gh('Название')}${fieldOne('hN','data-h="name"',x.v.name,'Например, фолиевая кислота')}</div>
       <div class="grp">${gh('Примечание')}${fieldOne('hT','data-h="note"',x.v.note,'Дозировка, когда пить')}</div>
+      <div class="grp">${gh('Приёмов в день')}<div class="seg">${[1,2,3,4,5,6].map(i=>`<button class="${vTimes(x.v)===i?'on':''}" data-s="vTimes" data-v="${i}">${i}</button>`).join('')}</div></div>
       <div class="acts"><button class="btn" data-s="hSave">${x.isNew?'Добавить':'Сохранить'}</button>${x.isNew?'':delBtn(x,'hDel','Удалить препарат')}</div>`;
   }
   else if(x.kind==='plan'){
@@ -1702,8 +1764,8 @@ function renderSheet(){
     const ks=Object.keys(S.days).filter(k=>(S.days[k].vitamins||[]).includes(v.id)).sort();
     if(!x.m)x.m=new Date(TODAY.getFullYear(),TODAY.getMonth(),1);
     const m=x.m,{rows,l}=monthRows(m);let c=0,g=DOW.map(d=>`<div class="hd">${d}</div>`).join('');
-    rows.forEach(w=>{for(let i=0;i<7;i++){const d=add(w,i),k=key(d),out=d.getMonth()!==m.getMonth(),on=!out&&(S.days[k]?.vitamins||[]).includes(v.id),fut=d>TODAY;if(on)c++;
-      g+=out?`<span class="sd out ${d<TODAY?'op':'of'}">${d.getDate()}</span>`:`<button class="hd2 ${on?'on':''} ${k===TK?'today':''} ${fut?'future':''}" data-s="hcDay" data-k="${k}" ${fut?'disabled':''} aria-label="${human(d)}">${on?ui('check'):d.getDate()}</button>`}});
+    rows.forEach(w=>{for(let i=0;i<7;i++){const d=add(w,i),k=key(d),out=d.getMonth()!==m.getMonth(),on=!out&&(S.days[k]?.vitamins||[]).includes(v.id);if(on)c++;
+      g+=out?`<span class="sd out ${d<TODAY?'op':'of'}">${d.getDate()}</span>`:hd2Dose(S.days[k],v,k,d,'data-s="hcDay"')}});
     const dim=l.getDate(),nav=`<div class="row"><button class="ib" data-s="hcPrev" aria-label="Предыдущий месяц">${ui('chevron_left')}</button><button class="ib" data-s="hcNext" aria-label="Следующий месяц">${ui('chevron_right')}</button></div>`;
     el.innerHTML=head(vTile(v),esc(v.name),ks.length?`Всего ${ks.length} ${plural(ks.length,'день','дня','дней')}`:'Пока нет отметок')+`<section class="card col"><div class="top"><div><div class="h2">${MON[m.getMonth()]} ${m.getFullYear()}</div><div class="cap num">${c} из ${dim} ${plural(dim,'дня','дней','дней')}</div></div>${nav}</div><div class="r7">${g}</div></section>`;
   }
@@ -1739,6 +1801,9 @@ function renderSheet(){
   }
   typo(el);fitTiles(el);
   el.scrollTop=sc;
+  if(live){const prevH=el.style.height;el.style.height='';const h1=el.offsetHeight;if(Math.abs(h1-h0)>2){const t=el._ht=(el._ht||0)+1;el.style.transition='none';el.style.height=h0+'px';reflow(el);
+    el.style.transition=`transform 500ms cubic-bezier(.22,1,.36,1),height 380ms ${E_OUT}`;el.style.height=h1+'px';setTimeout(()=>{if(el._ht===t){el.style.height='';el.style.transition=''}},420)}else if(prevH&&el._ht)el.style.height=prevH}
+  if(x._dir){const d=x._dir;x._dir=0;el.querySelectorAll('.card.col .r7, .card.col .top > div:first-child').forEach(c=>play(c,'kIn',340,{vars:{'--dx':d*14+'px','--dy':'0px'},ease:'cubic-bezier(0,0,.2,1)'}))}
   fxAfter(el);
 }
 
@@ -1778,18 +1843,15 @@ document.addEventListener('click',async ev=>{
       subToggle(card.querySelector('.rsub'),!REPOPEN);blockToggle(card.querySelector('.rep-body'),REPOPEN,()=>card.classList.toggle('open',REPOPEN))}
     else if(a==='restDay'){if(b._busy)return;const r=getDay(k);r.rest=!r.rest;
       if(RM){saveDay(k,r);return}
-      b._busy=true;const tg=b.querySelector('.tg');tg?.classList.toggle('on',r.rest);b.setAttribute('aria-pressed',r.rest);LASTSEL=null;recPop(false);
-      const oldRep=document.querySelector('.daycol .repg .repc')?.outerHTML;
-      if(r.rest){const rc=document.querySelector('[data-a=recToggle]');if(rc){rc.style.transition='opacity 250ms ease,transform 250ms ease';rc.style.opacity='0';rc.style.transform='scale(.85)'}await collapse(document.querySelector('.daycol .trn'))}
-      saveDay(k,r);
-      if(!r.rest){expand(document.querySelector('.daycol .trn'));const rc=document.querySelector('[data-a=recToggle]');play(rc,'kPopIn',350)}
-      const nr=document.querySelector('.daycol .repg .repc');if(nr&&nr.outerHTML!==oldRep)play(nr,'kIn',420,{vars:{'--dx':'0px','--dy':'6px'}})}
+      b._busy=true;LASTSEL=null;recPop(false);
+      TGH=!r.rest;saveDay(k,r);TGH=null;
+      const ntg=document.querySelector('.daycol [data-a=restDay] .tg');if(ntg)requestAnimationFrame(()=>requestAnimationFrame(()=>ntg.classList.toggle('on',r.rest)))}
     else if(a==='recToggle'){recPop(!document.querySelector('.daycol .hint.pop')?.classList.contains('show'))}
     else if(a==='entryDone'){const r=getDay(k);r.entries=r.entries.map(e=>e.id===b.dataset.id?{...e,done:!e.done}:e);saveDay(k,r)}
     else if(a==='entry'){const e=getDay(k).entries.find(x=>x.id===b.dataset.id);if(e)openSheet({kind:'entry',k,e:{link:'',...e}})}
     else if(a==='addEntry')openSheet(newEntry());
     else if(a==='addVit')openSheet(newVit());
-    else if(a==='vitDay'){const r=getDay(k),id=b.dataset.id;r.vitamins=(r.vitamins||[]).includes(id)?r.vitamins.filter(x=>x!==id):[...(r.vitamins||[]),id];saveDay(k,r)}
+    else if(a==='vitDay'){const r=getDay(k),v=S.profile.vitamins.find(y=>y.id===b.dataset.id);if(!v)return;setDose(r,v,nextDose(r,v,b.dataset.i==null?null:+b.dataset.i));saveDay(k,r)}
     else if(a==='report'){const r=getDay(k),pr=painOf(r);openSheet({kind:'report',k,exists:hasReport(r),fe:newFe(),r:{weight:+r.weight>0?fmtKg(+r.weight):'',rest:!!r.rest,food:r.food||'',foods:clone(r.foods||[]),note:r.note||'',ache:{back:0,belly:0,arms:0,legs:0,joints:0,...(pr||{})}}})}
     else if(a==='planEdit'){const i=+b.dataset.i;openSheet({kind:'plan',i,p:clone(S.profile.plan[i])})}
     else if(a==='sum'){const o=['days','weeks','month'],d=Math.sign(o.indexOf(b.dataset.v)-o.indexOf(S.sum));if(!d)return;crossView(2,d,()=>{S.sum=b.dataset.v})}
@@ -1852,11 +1914,11 @@ document.addEventListener('click',async ev=>{
     const e={id:fe.id||'f'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),name,fk:fkOf(f),q,u:fe.u};
     x.r.foods=fe.id?x.r.foods.map(y=>y.id===e.id?e:y):[...x.r.foods,e];
     if(saved)toast(fe.ownOf?'Свой продукт обновлён':'Продукт запомнила, в следующий раз узнаю его');
-    x.fe=newFe();updFood(true);if(!fe.id){const rs=document.querySelectorAll('#fList .fr');play(rs[rs.length-1],'kIn',460,{vars:{'--dx':'0px','--dy':'8px'}})}if(document.activeElement?.id==='fQ')document.getElementById('fN').focus({preventScroll:true});await saveDay(x.k,{...getDay(x.k),foods:x.r.foods});return}
+    x.fe=newFe();updFood(true);if(document.activeElement?.id==='fQ')document.getElementById('fN').focus({preventScroll:true});await saveDay(x.k,{...getDay(x.k),foods:x.r.foods});return}
   else if(a==='fDel'){if(!x.fe.arm){x.fe.arm=true;updFood();return}x.r.foods=x.r.foods.filter(y=>y.id!==x.fe.id);x.fe=newFe();updFood(true);await saveDay(x.k,{...getDay(x.k),foods:x.r.foods});return}
-  else if(a==='hcDay'){const k=s.dataset.k,r=getDay(k),id=x.id;r.vitamins=(r.vitamins||[]).includes(id)?r.vitamins.filter(y=>y!==id):[...(r.vitamins||[]),id];renderSheet();await saveDay(k,r);renderSheet();return}
+  else if(a==='hcDay'){const k=s.dataset.k,r=getDay(k),v=S.profile.vitamins.find(y=>y.id===x.id);if(!v)return;setDose(r,v,nextDose(r,v,null));renderSheet();await saveDay(k,r);renderSheet();return}
   else if(a==='goDay'){const k=x.k;closeSheet();S.tab='today';location.hash='today';S.sel=k;render();window.scrollTo(0,0);return}
-  else if(a==='hcPrev'||a==='hcNext'){x.m=new Date(x.m.getFullYear(),x.m.getMonth()+(a==='hcNext'?1:-1),1)}
+  else if(a==='hcPrev'||a==='hcNext'){x.m=new Date(x.m.getFullYear(),x.m.getMonth()+(a==='hcNext'?1:-1),1);x._dir=a==='hcNext'?1:-1}
   else if(a==='bAct'){x.b.act=+s.dataset.v}
   else if(a==='bPreg'){x.b.preg=!x.b.preg}
   else if(a==='bTri'){x.b.tri=+s.dataset.v}
@@ -1868,13 +1930,14 @@ document.addEventListener('click',async ev=>{
     S.profile={...S.profile,notes:x.isNew?[n,...S.profile.notes]:S.profile.notes.map(y=>y.id===n.id?n:y)};closeSheet();await saveProfile();toast(x.isNew?'Заметка добавлена':'Сохранено');return}
   else if(a==='ntDel'){if(!x.arm){x.arm=true;renderSheet();return}S.profile={...S.profile,notes:S.profile.notes.filter(y=>y.id!==x.n.id)};closeSheet();await saveProfile();toast('Удалено');return}
   else if(a==='vicon'){x.v.icon=+s.dataset.v}
+  else if(a==='vTimes'){x.v.times=+s.dataset.v}
   else if(a==='cPer'||a==='cSex'){if(a==='cPer')x.period=!x.period;else x.sex=!x.sex;renderSheet();await saveDay(x.k,{...getDay(x.k),period:x.period,sex:x.sex});return}
   else if(a==='nSave'){S.profile={...S.profile,name:(x.name||'').trim()};closeSheet();await saveProfile();toast('Сохранено');return}
   else if(a==='copy'){const ta=document.getElementById('expT');try{await navigator.clipboard.writeText(x.data);toast('Скопировано')}catch(e){ta.focus();ta.select();toast('Выдели текст и скопируй')}return}
   else if(a==='impGo'){const j=x.j;closeSheet();await applyImport(j);return}
   else if(a==='hSave'){
     if(!x.v.name.trim()){toast('Напиши название');return}
-    const v={id:x.v.id,name:x.v.name.trim(),note:(x.v.note||'').trim(),icon:x.v.icon};
+    const v={id:x.v.id,name:x.v.name.trim(),note:(x.v.note||'').trim(),icon:x.v.icon,...(vTimes(x.v)>1?{times:vTimes(x.v)}:{})};
     S.profile={...S.profile,vitamins:x.isNew?[...S.profile.vitamins,v]:S.profile.vitamins.map(y=>y.id===v.id?v:y)};
     closeSheet();await saveProfile();toast(x.isNew?'Добавлено':'Сохранено');return}
   else if(a==='hDel'){if(!x.arm){x.arm=true;renderSheet();return}S.profile={...S.profile,vitamins:S.profile.vitamins.filter(y=>y.id!==x.v.id)};closeSheet();await saveProfile();toast('Удалено');return}
